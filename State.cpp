@@ -64,7 +64,7 @@ inline int random(int n) {
 
 pair<int, int> State::train() const {
 	static int top[12], board[12][12];
-	int cnt = 10000, w = 0;
+	int cnt = 10, w = 0;
 	for (int tt = 0; tt < cnt; tt++) {
 
 		for (int i = 0; i < N; i++) top[i] = this->top[i];

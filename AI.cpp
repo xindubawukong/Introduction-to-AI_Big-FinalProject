@@ -65,7 +65,7 @@ pair<int, int> AI_getPoint(const int M, const int N, const int*_top, int**board,
 	root->init(top, board, lastX, lastY, false);
 	//_cprintf("After root->init()\n");
 	int ttt = 0;
-	while (clock()-time0<2500) {
+	while (clock()-time0<2600) {
 		//_cprintf("\n---------------------------- ttt=%d -------------------------\n", ttt++);
 		State *v = root->find();
 		pair<int,int> tmp=v->train();
@@ -78,12 +78,20 @@ pair<int, int> AI_getPoint(const int M, const int N, const int*_top, int**board,
 	}
 	//_cprintf("\n\n======================= everything ended =====================\n");
 	//root->debug(1);
-	int tmp = 0, j = 0;
+	double tmp = -1e18;
+	j = -1;
 	for (int i = 0; i<N; i++)
-		if (root->son[i] && root->son[i]->num > tmp && flag[i]) {
-			tmp = root->son[i]->num;
+		if (root->son[i] && root->son[i]->getUCB() > tmp && flag[i]) {
+			tmp = root->son[i]->getUCB();
 			j = i;
 		}
+	if (j == -1) {
+		for (int i = 0; i<N; i++)
+			if (root->son[i] && root->son[i]->getUCB() > tmp) {
+				tmp = root->son[i]->getUCB();
+				j = i;
+			}
+	}
 	pair<int, int> ans = make_pair(top[j] - 1, j);
 	//_cprintf("Before root->release()");
 	root->release();
