@@ -1,7 +1,7 @@
 #include "Judge.h"
 
 bool userWin(const int x, const int y, const int M, const int N, int* const* board){
-	//ºáÏò¼ì²â
+	  //ºáÏò¼ì²â
     int i, j;
     int count = 0;
     for (i = y; i >= 0; i--)
